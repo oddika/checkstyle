@@ -69,9 +69,9 @@ public class JavadocPackageCheck extends AbstractFileSetCheck {
     @Override
     protected void processFiltered(File file, FileText fileText) {
         // Check if already processed directory
-        final File dir = file.getParentFile();
-        final boolean isDirChecked = !directoriesChecked.add(dir);
-        if (!isDirChecked) {
+        final File dir = file.getAbsoluteFile().getParentFile();
+        final boolean dirNotChecked = directoriesChecked.add(dir);
+        if (dirNotChecked) {
             // Check for the preferred file.
             final File packageInfo = new File(dir, "package-info.java");
             final File packageHtml = new File(dir, "package.html");
